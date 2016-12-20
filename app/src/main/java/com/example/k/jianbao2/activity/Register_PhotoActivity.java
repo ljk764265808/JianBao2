@@ -47,14 +47,17 @@ public class Register_PhotoActivity extends Activity {
     private static final String TAG = "Register_PhotoActivity";
     @InjectView(R.id.ibtn_camera)
     ImageButton ibtnCamera;
-    private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
-    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
-    private static final int TAKE_PICTURE = 0;
-    private static final int CHOOSE_PICTURE = 1;
     @InjectView(R.id.iv_photo)
     ImageView ivPhoto;
     @InjectView(R.id.btn_register)
     Button btnRegister;
+    @InjectView(R.id.iv_back)
+    Button ivBack;
+    private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private static final int TAKE_PICTURE = 0;
+    private static final int CHOOSE_PICTURE = 1;
+
     private Uri uri;
     private File imageFile;
     private String choosepath;
@@ -126,17 +129,19 @@ public class Register_PhotoActivity extends Activity {
         }
     }
 
-    @OnClick({R.id.ibtn_camera, R.id.btn_register})
+    @OnClick({R.id.ibtn_camera, R.id.btn_register,R.id.iv_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibtn_camera:
                 showPicturePicker();
-
                 break;
             case R.id.btn_register:
                 //显示ProgressDialog
                 progressDialog = ProgressDialog.show(Register_PhotoActivity.this, "正在加载...", "请稍等...", false, true);
                 initRequest();
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }

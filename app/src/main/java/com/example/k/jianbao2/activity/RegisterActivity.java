@@ -3,8 +3,10 @@ package com.example.k.jianbao2.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -42,6 +44,8 @@ public class RegisterActivity extends Activity {
     RadioGroup rgGender;
     @InjectView(R.id.ed_phone)
     EditText edPhone;
+    @InjectView(R.id.iv_back)
+    ImageView ivBack;
     private String gender;
     private String username;
     private String password;
@@ -80,19 +84,28 @@ public class RegisterActivity extends Activity {
         map.put("code", code);
 
     }
-    @OnClick(R.id.btn_next)
-    public void onClick() {
-        initView();
-        //使用正则表达式判断手机号
-        if (PhoneNumberJudge.isMobileNO(phone)){
-            Intent intent = new Intent(RegisterActivity.this, Register_PhotoActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("map", map);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }else{
-            ShowUtils.show(RegisterActivity.this,"请输入正确的手机号");
-            edPhone.setText("");
+
+
+    @OnClick({R.id.iv_back, R.id.btn_next})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.btn_next:
+                initView();
+                //使用正则表达式判断手机号
+                if (PhoneNumberJudge.isMobileNO(phone)) {
+                    Intent intent = new Intent(RegisterActivity.this, Register_PhotoActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("map", map);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    ShowUtils.show(RegisterActivity.this, "请输入正确的手机号");
+                    edPhone.setText("");
+                }
+                break;
         }
     }
 }
