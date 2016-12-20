@@ -231,7 +231,6 @@ public class FaBuActivity extends Activity {
             String imagePath = cursor.getString(columnIndex);
             lists.add(imagePath);
             lists.add(String.valueOf(imageViews));//把获取到的图片添加到list集合当中
-//            showImage(imagePath);
             cursor.close();
         } else if (requestCode == Action.REQUEST_CODE_OPEN_CAPTURE) {
             getPicture(requestCode, resultCode, data);
