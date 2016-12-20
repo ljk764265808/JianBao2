@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     defaultConfig {
         applicationId "com.example.k.jianbao2"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,10 +22,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:22.2.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    compile 'com.commit451:NativeStackBlur:1.0.2'
+    compile 'jp.wasabeef:fresco-processors:2.0.0'
+    compile 'com.orhanobut:Logger:1.1'
+    compile files('libs/libs/glide-3.7.0.jar')
+    compile files('libs/libs/universal-image-loader-1.9.0.jar')
 }

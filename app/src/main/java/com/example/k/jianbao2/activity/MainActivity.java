@@ -1,10 +1,16 @@
-package com.example.k.jianbao2;
+package com.example.k.jianbao2.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.k.jianbao2.R;
 
+
+/**
+ * Created by admin on 2016/12/19.
+ */
+
+public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
