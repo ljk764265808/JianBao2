@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
         manager=getSupportFragmentManager();
         initView();
-        //提交
+
     }
     private void initView() {
         mFrag_grup= (LinearLayout) findViewById(R.id.mFrag_group);
