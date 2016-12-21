@@ -1,8 +1,6 @@
 package us.mifeng.k.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -46,6 +44,7 @@ import us.mifeng.k.action.Action;
 import us.mifeng.k.app.MInterface;
 import us.mifeng.k.sdFile.SaveFile;
 import us.mifeng.k.utils.OkHttpUtils;
+import us.mifeng.k.utils.ShareUtils;
 
 /**
  * Created by k on 2016/12/20.
@@ -63,7 +62,6 @@ public class FaBuActivity extends Activity {
     private Handler handler = new Handler();
     //创建一个集合，用来存放从照相机中获取的照片。
     ArrayList<Bitmap> photoBitmaps = new ArrayList<>();
-    private Button bt_quxiao;
     private GridView gridview;
     private View addView;
     private ImageLoader imageLoader;
@@ -72,7 +70,7 @@ public class FaBuActivity extends Activity {
     private PopupWindow popupWindow1;
     private LinearLayout ll;
     private Button tuku, paizhao, cancel;
-    //提交
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,21 +90,20 @@ public class FaBuActivity extends Activity {
         iv_6 = (ImageView) findViewById(R.id.iv6);
 
 
-        imageViews[0] = iv_2;
-        imageViews[1] = iv_3;
-        imageViews[2] = iv_4;
-        imageViews[3] = iv_5;
-        imageViews[4] = iv_6;
+        imageViews[0]=iv_2;
+        imageViews[1]=iv_3;
+        imageViews[2]=iv_4;
+        imageViews[3]=iv_5;
+        imageViews[4]=iv_6;
 
 
-        et_title = (EditText) findViewById(R.id.et_title);
-        et_miaoshu = (EditText) findViewById(R.id.et_miaoshu);
-        et_price = (EditText) findViewById(R.id.et_price);
-        et_phone = (EditText) findViewById(R.id.et_phone);
-        et_qq = (EditText) findViewById(R.id.et_qq);
-        et_weixin = (EditText) findViewById(R.id.et_weixin);
-        bt_fabu = (Button) findViewById(R.id.bt_fabu);
-        bt_quxiao = (Button) findViewById(R.id.bt_quxiao);
+        et_title = (EditText)findViewById(R.id.et_title);
+        et_miaoshu = (EditText)findViewById(R.id.et_miaoshu);
+        et_price = (EditText)findViewById(R.id.et_price);
+        et_phone = (EditText)findViewById(R.id.et_phone);
+        et_qq = (EditText)findViewById(R.id.et_qq);
+        et_weixin = (EditText)findViewById(R.id.et_weixin);
+        bt_fabu = (Button)findViewById(R.id.bt_fabu);
 
         iv_1.setOnClickListener(new View.OnClickListener() {
 
@@ -115,7 +112,7 @@ public class FaBuActivity extends Activity {
                 View pop = View.inflate(FaBuActivity.this, R.layout.popuwindow_main, null);
                 paizhao = (Button) pop.findViewById(R.id.paizhao);
                 tuku = (Button) pop.findViewById(R.id.tuku);
-                cancel = (Button) pop.findViewById(R.id.cancel);
+                cancel=(Button) pop.findViewById(R.id.cancel);
                 paizhao.setOnClickListener(new BtnOnClickListener());
                 tuku.setOnClickListener(new BtnOnClickListener());
                 cancel.setOnClickListener(new BtnOnClickListener());
@@ -126,7 +123,7 @@ public class FaBuActivity extends Activity {
                 //设置点击PopupWindow以外的地方关闭PopupWindow
                 popupWindow1.setOutsideTouchable(true);
                 popupWindow1.setAnimationStyle(R.style.Animation);
-                popupWindow1.showAtLocation(ll, Gravity.BOTTOM | Gravity
+                popupWindow1.showAtLocation(ll, Gravity.BOTTOM|Gravity
                         .CENTER_HORIZONTAL, 0, 0);
                 popupWindow1.setTouchInterceptor(new View.OnTouchListener() {
                     @Override
@@ -141,6 +138,7 @@ public class FaBuActivity extends Activity {
             }
         });
 
+
         bt_fabu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,11 +148,13 @@ public class FaBuActivity extends Activity {
                 String trim4 = et_phone.getText().toString().trim();
                 String trim5 = et_qq.getText().toString().trim();
                 String trim6 = et_weixin.getText().toString().trim();
-                map.put("token", "D02CCD29BCD24780AC8751FE73F8263B");
+                String token= (String) ShareUtils.getData(FaBuActivity.this,"token","");
+                map.put("token", token);
                 map.put("title", trim1);
                 map.put("description", trim2);
                 map.put("price", trim3);
                 map.put("mobile", trim4);
+
                 OkHttpUtils.UploadFileSCMore(MInterface.zhuji + MInterface.fabu, lists, map, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -165,6 +165,7 @@ public class FaBuActivity extends Activity {
                     public void onResponse(Call call, Response response) throws IOException {
                         String string = response.body().string();
                         System.out.println(string);
+                        Log.e("tag","lists");
                     }
                 });
                 if (TextUtils.isEmpty(trim1)) {
@@ -181,27 +182,13 @@ public class FaBuActivity extends Activity {
                 }
             }
         });
-        bt_quxiao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(FaBuActivity.this)
-                        .setMessage("确定要取消发布吗")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        }).
-                        show();
-            }
-        });
-    }
 
+    }
     class BtnOnClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
+            switch (v.getId()){
                 case R.id.paizhao:
                     Intent intentCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     FaBuActivity.this.startActivityForResult(intentCapture, Action.REQUEST_CODE_OPEN_CAPTURE);
@@ -209,13 +196,17 @@ public class FaBuActivity extends Activity {
                     break;
                 case R.id.tuku:
                     Intent intentMul = new Intent(Action.ACTION_MULT_SELECTED);
-                    FaBuActivity.this.startActivityForResult(intentMul, Action.REQUEST_CODE_MULT_ALDUM);
+                    FaBuActivity.this.startActivityForResult(intentMul,Action.REQUEST_CODE_MULT_ALDUM);
                     popupWindow1.dismiss();
                     break;
                 case R.id.cancel:
                     popupWindow1.dismiss();
             }
         }
+    }
+
+    public void fanhui(View v){
+        finish();
     }
 
     @Override
@@ -230,33 +221,36 @@ public class FaBuActivity extends Activity {
             int columnIndex = cursor.getColumnIndex(filePathColumns[0]);
             String imagePath = cursor.getString(columnIndex);
             lists.add(imagePath);
-            lists.add(String.valueOf(imageViews));//把获取到的图片添加到list集合当中
+
+//            showImage(imagePath);
             cursor.close();
-        } else if (requestCode == Action.REQUEST_CODE_OPEN_CAPTURE) {
-            getPicture(requestCode, resultCode, data);
-            if (photoBitmaps != null) {
+        }else if (requestCode== Action.REQUEST_CODE_OPEN_CAPTURE){
+            getPicture(requestCode,resultCode,data);
+            if(photoBitmaps!=null){
                 //popupWindow1.dismiss();
                 imageSetBitmap();
             }
-        } else if (requestCode == Action.REQUEST_CODE_MULT_ALDUM && resultCode == Activity.RESULT_OK) {
+        }else if(requestCode== Action.REQUEST_CODE_MULT_ALDUM&&resultCode==Activity.RESULT_OK){
             //  popupWindow1.dismiss();
             final String[] all_path = data.getStringArrayExtra("all_path");
             //将路径转换为bitmap对象
-            for (int i = 0; i < all_path.length; i++) {
-                Log.i("tag", "------adf----------" + all_path[i]);
+            for(int i=0;i<all_path.length;i++){
+                Log.i("tag","------adf----------"+all_path[i]);
                 File file = new File(all_path[i]);
                 Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                if (bitmap != null) {
+                if(bitmap!=null){
                     BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = bitmap.getHeight() / 200;
+                    options.inSampleSize=bitmap.getHeight()/200;
                     Bitmap bitmap1 = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-                    if (photoBitmaps.size() > i) {
+                    if(photoBitmaps.size() > i){
                         photoBitmaps.remove(i);
                     }
                     photoBitmaps.add(bitmap1);
-                    if (photoBitmaps.size() > 5) {
+                    if (photoBitmaps.size()>5){
                         Toast.makeText(FaBuActivity.this, "最多添加五张图片,请重新选择", Toast.LENGTH_SHORT).show();
-                    } else {
+                    }
+                    else
+                    {
                         imageSetBitmap();
                     }
 //                                    photoAdapter.notifyDataSetChanged();
@@ -268,67 +262,63 @@ public class FaBuActivity extends Activity {
     }
 
     private void imageSetBitmap() {
-        for (int j = 0; j < photoBitmaps.size(); j++) {
-            imageViews[j].setImageBitmap(photoBitmaps.get(photoBitmaps.size() - 1 - j));
-
+        for (int j=0;j<photoBitmaps.size();j++) {
+            imageViews[j].setImageBitmap(photoBitmaps.get(photoBitmaps.size()-1-j));
         }
+
+
     }
 
     //当另外的Activity关闭时返回结果此方法中，该方法为Activity的方法
-    private void getPicture(int requestCode, int resultCode, Intent data) {
+    private void getPicture(int requestCode, int resultCode, Intent data){
         Uri uri = data.getData();
-        if (uri == null) {
-            // if(resultCode== Activity.RESULT_OK){
-            if (SaveFile.isScardOk()) {
+        if (uri==null){
+            if(SaveFile.isScardOk()){
                 Bundle bundle = data.getExtras();
                 Bitmap bitmap = (Bitmap) bundle.get("data");
                 SaveFile.saveBitmap(bitmap);
                 Bitmap bt = SaveFile.getBitmap();
                 //将获取的图片存放到list集合当中，然后通知适配器进行更改，并显示数据
-                if (photoBitmaps.size() == 5) {
-                    photoBitmaps.remove(photoBitmaps.size() - 1);
+                if (photoBitmaps.size()==5){
+                    photoBitmaps.remove(photoBitmaps.size()-1);
                 }
                 photoBitmaps.add(bt);
 
             }
             // }
-        } else {
+        }else{
             //根据uri获取图片的路径
             String imagePath = getImagePath(uri);
             //根据路径获取图片的位图。
-            Bitmap bitmap = getUriImage(imagePath);
+            Bitmap bitmap =  getUriImage(imagePath);
             photoBitmaps.add(bitmap);
         }
     }
-
     private Bitmap getUriImage(String imagePath) {
         //获取图片加工厂的参数对象
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
-        Log.i("tag", "-------------------->" + bitmap);
+        Log.i("tag","-------------------->"+bitmap);
         //设置图片的压缩比例
-        int be = (int) (options.outHeight / (float) 320);
-        if (be <= 0) {
-            be = 1;
-        }
+        int be = (int)(options.outHeight/(float)320);
+        if(be<=0){be = 1;}
         options.inSampleSize = be;
         options.inJustDecodeBounds = false;
         //重新读入图片
-        Bitmap resultBitmap = BitmapFactory.decodeFile(imagePath, options);
+        Bitmap resultBitmap = BitmapFactory.decodeFile(imagePath,options);
         return resultBitmap;
 
     }
 
     private String getImagePath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        String[] projection ={MediaStore.Images.Media.DATA};
+        Cursor cursor =managedQuery(uri,projection,null,null,null);
         int coloum_index = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         String imagePath = cursor.getString(coloum_index);
         return imagePath;
     }
-
     //初始化ImageLoader，并设置ImageLoader的一些属性
     private void initImageLoader() {
         //显示图片的参数设置

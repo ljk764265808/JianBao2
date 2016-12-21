@@ -29,7 +29,7 @@
                 android:id="@+id/mTv_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="首页"
+                android:text="商品列表"
                 android:textColor="#f00"
                 android:textSize="10sp" />
         </LinearLayout>

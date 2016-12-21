@@ -15,8 +15,8 @@ import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
 import java.util.ArrayList;
 
+import us.mifeng.k.R;
 import us.mifeng.k.activity.CustomGallery;
-import mifeng.us.jianbao2.R;
 
 
 /**

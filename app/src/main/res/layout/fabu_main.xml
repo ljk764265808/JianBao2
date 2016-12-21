@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="#97FFFF"
+        >
+
+        <Button
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@mipmap/fanhui"
+            android:layout_marginLeft="5dp"
+            android:onClick="fanhui"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:layout_gravity="center"
+            android:layout_marginLeft="125dp"/>
+
+    </LinearLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:id="@+id/ll"
@@ -12,13 +45,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="320dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="280dp"
                 android:orientation="vertical">
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -30,7 +65,6 @@
                         android:layout_height="100dp"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
-
                         >
 
                         <ImageView
@@ -146,7 +180,8 @@
                     android:hint="请输入宝贝名称"
                     android:padding="5dp"
                     android:textColor="#000"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    />
 
             </LinearLayout>
 
@@ -307,29 +342,17 @@
 
             <Button
                 android:id="@+id/bt_fabu"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:layout_weight="1"
                 android:background="#FFF"
                 android:text="确认发布"
-                android:textColor="#F00"
-                android:textSize="18sp" />
-
-            <Button
-                android:id="@+id/bt_quxiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="#FFF"
-                android:text="取消发布"
                 android:textColor="#F00"
                 android:textSize="18sp" />
 
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

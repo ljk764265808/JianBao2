@@ -64,8 +64,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 ft.show(mFrag_home);
                 break;
             case R.id.mLine_fabu:
-                mImg_fabu.setImageResource(R.mipmap.fabu2);
-                mTv_fabu.setTextColor(Color.RED);
                 startActivity(new Intent(this,FaBuActivity.class));
                 break;
             case R.id.mLine_mine:
