@@ -11,14 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import mifeng.us.jianbao2.R;
+import us.mifeng.k.R;
 import us.mifeng.k.fragment.Fragment_Goods;
 import us.mifeng.k.fragment.Fragment_Mine;
 
-
-/**
- * Created by k on 2016/11/24.
- */
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     private LinearLayout mFrag_grup,mLine_home,mLine_fabu,mLine_mine;

@@ -24,9 +24,9 @@ import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import us.mifeng.k.R;
 import us.mifeng.k.action.Action;
 import us.mifeng.k.adapter.GrallayAdapter;
-import mifeng.us.jianbao2.R;
 
 
 public class CustormActivity extends AppCompatActivity {
