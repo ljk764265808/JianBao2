@@ -72,7 +72,7 @@ public class FaBuActivity extends Activity {
     private PopupWindow popupWindow1;
     private LinearLayout ll;
     private Button tuku, paizhao, cancel;
-
+    //提交
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
