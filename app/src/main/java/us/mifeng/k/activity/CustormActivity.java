@@ -50,7 +50,7 @@ public class CustormActivity extends AppCompatActivity {
         initImageLoader();
         init();
     }
-
+    //提交
     //初始化ImageLoader，并设置ImageLoader的一些属性
     private void initImageLoader() {
         //显示图片的参数设置
