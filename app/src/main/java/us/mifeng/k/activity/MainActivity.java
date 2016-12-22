@@ -64,6 +64,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 ft.show(mFrag_home);
                 break;
             case R.id.mLine_fabu:
+                mImg_fabu.setImageResource(R.mipmap.fabu2);
+                mTv_fabu.setTextColor(Color.RED);
                 startActivity(new Intent(this,FaBuActivity.class));
                 break;
             case R.id.mLine_mine:
@@ -82,9 +84,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     //将底部颜色清空
     private void clearBottom(){
         mImg_home.setImageResource(R.mipmap.shangpin);
+        mImg_fabu.setImageResource(R.mipmap.fabu);
         mImg_mine.setImageResource(R.mipmap.gerenzhongxin);
 
         mTv_home.setTextColor(Color.BLACK);
+        mTv_fabu.setTextColor(Color.BLACK);
         mTv_mine.setTextColor(Color.BLACK);
     }
     //隐藏所有的fragment的方法

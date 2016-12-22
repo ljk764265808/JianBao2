@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:orientation="horizontal"
         android:background="#97FFFF"
         >
@@ -16,6 +16,7 @@
             android:layout_height="28dp"
             android:background="@mipmap/fanhui"
             android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
             android:onClick="fanhui"/>
 
         <TextView
@@ -40,7 +41,7 @@
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#90ee90"
+
         android:orientation="vertical">
 
         <LinearLayout
@@ -118,7 +119,6 @@
                     <ImageView
                         android:id="@+id/iv5"
                         android:layout_width="0dp"
-
                         android:layout_height="100dp"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
-                android:text="(友情提示：上传照片数量应不多于5张)"
+                android:text="(友情提示：照片数量不多于5张,点击图片可删除)"
                 android:textColor="#000"
                 android:textSize="16sp" />
 
@@ -338,7 +338,8 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="60dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <Button
                 android:id="@+id/bt_fabu"
@@ -346,10 +347,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:background="#FFF"
                 android:text="确认发布"
                 android:textColor="#F00"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:background="#FFF"
+                android:button="@null"/>
 
         </LinearLayout>
 
